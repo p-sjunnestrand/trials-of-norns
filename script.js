@@ -110,12 +110,16 @@ function fourthTrial(){
     fourthProceed.classList.add('btn');
 
     let fourthInput = document.getElementById('fourthInput');
-    window.addEventListener('keyup', ()=>{
+
+    const matchPassword = () => {
         if (fourthInput.value == 'Verdandi'){
             mainWrapper.appendChild(fourthProceed);
         }
-    });
+    }
+
+    window.addEventListener('keyup', matchPassword);
     fourthProceed.addEventListener('click', ()=>{
+            window.removeEventListener('keyup', matchPassword);
             fifthTrial();
     });
 }
@@ -145,6 +149,8 @@ function sixthTrial(){
     sixthBox.innerHTML = 'Proceed';
     mainWrapper.appendChild(sixthBox);
     window.addEventListener('storage', function(e){
+        // This doesn't work because the way the event listener works is it only detects changes made to storage in another window.
+        // Maybe function that makes the user change their system clock?
         if(e.key == 'name'){
             sixthBox.style.display = 'block';
         }
